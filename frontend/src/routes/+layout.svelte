@@ -5,30 +5,14 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
+  import { browser } from '$app/environment';
 
   import Header from "../components/Header.svelte";
   import Sidebar from "../components/Sidebar.svelte";
   import Footer from "../components/Footer.svelte";
   import Breadcrumb from "../components/Breadcrumb.svelte";
 
-  export let data; // รับข้อมูลจาก +layout.js
-
-  // เพิ่ม interface สำหรับ User เพื่อแก้ไขปัญหา Property 'name' does not exist on type 'never'
-  // interface User {
-  //   name: string;
-  // }
-
-  // กำหนดประเภทสำหรับ authStore เพื่อแก้ไขปัญหาการเข้าถึง user
-  interface AuthStoreType {
-    isAuthenticated: boolean;
-    loading: boolean;
-    // user: User | null;
-    initialize: () => void;
-    logout: () => void;
-  }
-
-  // กำหนดค่า authStore ให้มีประเภทที่ถูกต้อง
-  const typedAuthStore = authStore as unknown as AuthStoreType;
+  export let data;
 
   interface Link {
     href: string;
@@ -103,35 +87,39 @@
     isSidebarOpen = !isSidebarOpen;
   }
   
-  // จัดการกับการตรวจสอบการล็อกอิน
+  // จัดการกับการตรวจสอบการล็อกอินแบบชัวร์ 100%
   $: {
-    const publicPaths = ['/', '/login'];
-    const isPublicPath = publicPaths.some(path => $page.url.pathname === path || $page.url.pathname.startsWith('/auth'));
-    
-    if (!isPublicPath && !$authStore.isAuthenticated && !$authStore.loading) {
-      goto('/');
+    // เช็คว่าทำงานบนเบราว์เซอร์แล้ว และโหลดข้อมูลเสร็จ+ไม่ได้ล็อกอิน
+    if (browser && !$authStore.loading && !$authStore.isAuthenticated) {
+      const publicPaths = ['/', '/login'];
+      const isPublicPath = publicPaths.some(path => $page.url.pathname === path || $page.url.pathname.startsWith('/auth'));
+      
+      if (!isPublicPath) {
+        // ใช้ window.location.replace เพื่อบังคับเด้งทันทีและไม่เก็บประวัติการเข้าชม
+        window.location.replace('/'); 
+      }
     }
   }
   
   onMount(() => {
     // เริ่มต้น authStore เมื่อหน้าโหลด
-    typedAuthStore.initialize();
+    authStore.initialize();
   });
   
   // ฟังก์ชันสำหรับการล็อกเอาต์
   function logout() {
-    typedAuthStore.logout();
+    authStore.logout();
     goto('/');
   }
 </script>
 
-<!-- ถ้าอยู่ในหน้าล็อกอินหรือหน้าที่ไม่ต้องการเลย์เอาต์ -->
 {#if $page.url.pathname === '/' || $page.url.pathname === '/login'}
   <slot />
 {:else if $authStore.loading}
-  <div class="loading-container">กำลังโหลด...</div>
+  <div class="loading-container">
+    กำลังโหลด...
+  </div>
 {:else if $authStore.isAuthenticated}
-  <!-- ถ้าล็อกอินแล้วให้แสดงเลย์เอาต์ปกติ -->
   <div class="layout">
     <Header />
     <div class="main-content">
@@ -148,11 +136,7 @@
     <Footer />
   </div>
 {:else}
-  <!-- ถ้ายังไม่ล็อกอินให้เปลี่ยนเส้นทางไปหน้าล็อกอิน -->
-  <script>
-    window.location.href = '/';
-  </script>
-{/if}
+  {/if}
 
 <style>
   .layout {

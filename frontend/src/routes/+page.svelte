@@ -3,6 +3,7 @@
   import SocialLogin from "$lib/SocialLogin.svelte";
   import { goto } from "$app/navigation";
   import { browser } from "$app/environment";
+  import { authStore } from '$lib/stores/authStore';
 
   const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const FACEBOOK_APP_ID = import.meta.env.VITE_FACEBOOK_APP_ID;
@@ -18,7 +19,6 @@
 
     try {
       const response = await fetch(`${BACKEND_API}/auth/google`, {
-        // ใช้ BACKEND_API
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,9 +40,7 @@
 
       const data = await response.json();
 
-      if (browser) {
-        localStorage.setItem("sessionToken", data.token);
-      }
+      authStore.login(data.token, data.user);
 
       goto("/home");
     } catch (err) {
@@ -55,48 +53,49 @@
 
 
   async function handleFacebookSuccess(event) {
-  const { accessToken, user } = event.detail;
-  loading = true;
-  error = null;
+    const { accessToken, user, userID } = event.detail;
+    loading = true;
+    error = null;
 
-  try {
-    if (!user.id) {
-      throw new Error("Missing Facebook ID");
-    }
+    try {
+      if (!userID) {
+        throw new Error("Missing Facebook ID");
+      }
 
-    const response = await fetch(`${BACKEND_API}/auth/facebook`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        accessToken,
-        userData: {
-          facebookId: user.id,
-          name: user.name,
-          email: user.email,
-          picture: user.picture?.data?.url,
+      const response = await fetch(`${BACKEND_API}/auth/facebook`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      }),
-    });
+        body: JSON.stringify({
+          accessToken,
+          userData: {
+            facebookId: userID,
+            name: user.name,
+            email: user.email,
+            picture: user.picture?.data?.url,
+          },
+        }),
+      });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Server error:", errorData);
-      throw new Error("Failed to authenticate with server");
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Server error:", errorData);
+        throw new Error("Failed to authenticate with server");
+      }
+
+      const data = await response.json();
+      
+      authStore.login(data.token, data.user);
+      
+      goto("/home");
+    } catch (err) {
+      console.error("Facebook authentication error:", err);
+      error = "Failed to complete authentication. Please try again.";
+    } finally {
+      loading = false;
     }
-
-    const data = await response.json();
-    localStorage.setItem("sessionToken", data.token);
-    goto("/home");
-  } catch (err) {
-    console.error("Facebook authentication error:", err);
-    error = "Failed to complete authentication. Please try again.";
-  } finally {
-    loading = false;
   }
-}
-
 
   function handleGoogleFailure(event) {
     const { error: authError } = event.detail;
@@ -111,11 +110,12 @@
     error = "Failed to authenticate with Facebook. Please try again.";
     loading = false;
   }
+  
   onMount(() => {
-  if (browser && localStorage.getItem("sessionToken")) {
-    goto("/home");
-  }
-});
+    if (browser && localStorage.getItem("sessionToken")) {
+      goto("/home");
+    }
+  });
 </script>
 
 <div class="container">
@@ -184,11 +184,6 @@
 
   .header-section {
     margin-bottom: 2rem;
-  }
-
-  .logo {
-    width: 120px;
-    margin-bottom: 1.5rem;
   }
 
   h1 {

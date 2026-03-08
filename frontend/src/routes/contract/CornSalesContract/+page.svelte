@@ -3,9 +3,10 @@
   import jsPDF from "jspdf";
   import "jspdf-autotable";
   import { font } from "$lib/THSarabunNew-normal.js";
-  import Toast from "$lib/components/Toast.svelte";
+  import Toast from "$lib/Toast.svelte";
   import { addToast } from "$lib/stores/toastStore";
 
+  const BACKEND_API = import.meta.env.VITE_BACKEND_API; 
   const initialFormData = {
     c1: "",
     c2: "",
@@ -57,10 +58,11 @@
       return;
     }
 
-    const response = await fetch("http://localhost:8000/document/add", {
+    const response = await fetch(`${BACKEND_API}/documents`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('sessionToken')}`
       },
       body: JSON.stringify({
         document_type_id: 2,

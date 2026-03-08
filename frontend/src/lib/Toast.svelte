@@ -19,7 +19,7 @@
   import { toastStore } from "$lib/stores/toastStore";
   import { onDestroy } from "svelte";
 
-  let toasts = [];
+  let toasts  = [];
 
   // Subscribe ค่า toast จาก store
   const unsubscribe = toastStore.subscribe(value => {
