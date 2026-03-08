@@ -12,8 +12,6 @@
   import Footer from "../components/Footer.svelte";
   import Breadcrumb from "../components/Breadcrumb.svelte";
 
-  export let data;
-
   interface Link {
     href: string;
     text: string;
@@ -28,21 +26,9 @@
       text: "สัญญา",
       icon: "fa-solid fa-cogs",
       submenu: [
-        {
-          href: "/contract/GeneralSalesContract",
-          text: "สัญญาซื้อขายทั่วไป",
-          icon: "fa-solid fa-file",
-        },
-        {
-          href: "/contract/CornSalesContract",
-          text: "สัญญาซื้อขายข้าวโพด",
-          icon: "fa-solid fa-file",
-        },
-        {
-          href: "/contract/ContractFarmingAgreement",
-          text: "สัญญาจ้างเลี้ยง",
-          icon: "fa-solid fa-file",
-        },
+        { href: "/contract/GeneralSalesContract", text: "สัญญาซื้อขายทั่วไป", icon: "fa-solid fa-file" },
+        { href: "/contract/CornSalesContract", text: "สัญญาซื้อขายข้าวโพด", icon: "fa-solid fa-file" },
+        { href: "/contract/ContractFarmingAgreement", text: "สัญญาจ้างเลี้ยง", icon: "fa-solid fa-file" },
       ],
     },
     {
@@ -50,21 +36,9 @@
       text: "วิสาหกิจชุมชน",
       icon: "fa-solid fa-gavel",
       submenu: [
-        {
-          href: "/communityEnterprise/GeneralPetitionForm",
-          text: "แบบคำร้องทั่วไป",
-          icon: "fa-solid fa-file",
-        },
-        {
-          href: "/communityEnterprise/BusinessPlan",
-          text: "แผนประกอบการ",
-          icon: "fa-solid fa-file",
-        },
-        {
-          href: "/communityEnterprise/OperationResults",
-          text: "ผลการดำเนินงาน",
-          icon: "fa-solid fa-file",
-        },
+        { href: "/communityEnterprise/GeneralPetitionForm", text: "แบบคำร้องทั่วไป", icon: "fa-solid fa-file" },
+        { href: "/communityEnterprise/BusinessPlan", text: "แผนประกอบการ", icon: "fa-solid fa-file" },
+        { href: "/communityEnterprise/OperationResults", text: "ผลการดำเนินงาน", icon: "fa-solid fa-file" },
       ],
     },
     {
@@ -87,26 +61,22 @@
     isSidebarOpen = !isSidebarOpen;
   }
   
-  // จัดการกับการตรวจสอบการล็อกอินแบบชัวร์ 100%
   $: {
-    // เช็คว่าทำงานบนเบราว์เซอร์แล้ว และโหลดข้อมูลเสร็จ+ไม่ได้ล็อกอิน
     if (browser && !$authStore.loading && !$authStore.isAuthenticated) {
       const publicPaths = ['/', '/login'];
       const isPublicPath = publicPaths.some(path => $page.url.pathname === path || $page.url.pathname.startsWith('/auth'));
       
       if (!isPublicPath) {
-        // ใช้ window.location.replace เพื่อบังคับเด้งทันทีและไม่เก็บประวัติการเข้าชม
         window.location.replace('/'); 
       }
     }
   }
   
   onMount(() => {
-    // เริ่มต้น authStore เมื่อหน้าโหลด
     authStore.initialize();
   });
   
-  // ฟังก์ชันสำหรับการล็อกเอาต์
+  // ฟังก์ชันสำหรับการล็อกเอาต์ (หากใช้ใน Header ให้ส่งผ่าน props หรือใช้ store)
   function logout() {
     authStore.logout();
     goto('/');
@@ -132,12 +102,9 @@
         <slot />
       </main>
     </div>
-
     <Footer />
   </div>
-{:else}
-  {/if}
-
+{/if}
 <style>
   .layout {
     display: flex;
@@ -189,25 +156,6 @@
     height: 100vh;
     font-size: 1.5rem;
     color: #333;
-  }
-  
-  .user-name {
-    margin-right: 10px;
-    font-weight: bold;
-  }
-  
-  .logout-btn {
-    background: #f44336;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .logout-btn:hover {
-    background: #d32f2f;
   }
 
   @media (max-width: 768px) {
