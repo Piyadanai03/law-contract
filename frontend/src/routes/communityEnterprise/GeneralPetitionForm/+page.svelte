@@ -6,6 +6,7 @@
   import Toast from "$lib/components/Toast.svelte";
   import { addToast } from "$lib/stores/toastStore";
 
+  const BACKEND_API = import.meta.env.VITE_BACKEND_API;
   const initialFormData = {
     a0: "",
     a1: "",
@@ -64,7 +65,7 @@
       return;
     }
 
-    const response = await fetch("http://localhost:8000/document/add", {
+    const response = await fetch(`${BACKEND_API}/document/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -415,7 +416,7 @@
 
     fileName += ".pdf";
     doc.save(fileName);
-    addToast ("ดาวน์โหลดไฟล์สำเร็จ", "success");
+    addToast("ดาวน์โหลดไฟล์สำเร็จ", "success");
   }
 
   function clearFormData(type: string) {
@@ -1137,7 +1138,8 @@
       font-size: 0.9rem;
     }
 
-    th, td {
+    th,
+    td {
       padding: 5px;
     }
   }
@@ -1151,7 +1153,8 @@
       align-items: center;
     }
 
-    .title h1, .title h2 {
+    .title h1,
+    .title h2 {
       font-size: 1.2rem;
     }
 
@@ -1159,11 +1162,13 @@
       font-size: 0.8rem;
     }
 
-    th, td {
+    th,
+    td {
       padding: 3px;
     }
 
-    input[type="text"], textarea {
+    input[type="text"],
+    textarea {
       font-size: 0.9rem;
     }
 

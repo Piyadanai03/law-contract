@@ -6,6 +6,7 @@
   import Toast from "$lib/components/Toast.svelte";
   import { addToast } from "$lib/stores/toastStore";
 
+  const BACKEND_API = import.meta.env.VITE_BACKEND_API; 
   const initialFormData = {
     f1: "",
     f2: "",
@@ -63,7 +64,7 @@
       return;
     }
 
-    const response = await fetch("http://localhost:8000/document/add", {
+    const response = await fetch(`${BACKEND_API}/document/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

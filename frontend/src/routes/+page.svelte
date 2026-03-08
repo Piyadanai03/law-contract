@@ -6,7 +6,7 @@
 
   const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
   const FACEBOOK_APP_ID = import.meta.env.VITE_FACEBOOK_APP_ID;
-  const API_BASE_URL = "http://localhost:8000"; 
+  const BACKEND_API = import.meta.env.VITE_BACKEND_API; 
 
   let loading = false;
   let error = null;
@@ -17,8 +17,8 @@
     error = null;
 
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/google`, {
-        // ใช้ API_BASE_URL
+      const response = await fetch(`${BACKEND_API}/auth/google`, {
+        // ใช้ BACKEND_API
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@
       throw new Error("Missing Facebook ID");
     }
 
-    const response = await fetch(`${API_BASE_URL}/auth/facebook`, {
+    const response = await fetch(`${BACKEND_API}/auth/facebook`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

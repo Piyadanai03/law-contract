@@ -122,6 +122,8 @@
     e113: "",
   };
 
+  const BACKEND_API = import.meta.env.VITE_BACKEND_API; 
+
   let formData = structuredClone(initialFormData);
 
   let isSubmitting = false;
@@ -136,7 +138,7 @@
       return;
     }
 
-    const response = await fetch("http://localhost:8000/document/add", {
+    const response = await fetch(`${BACKEND_API}/document/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
