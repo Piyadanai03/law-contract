@@ -1002,18 +1002,9 @@
     flex-grow: 1;
   }
 
-  .title h1,
-  .title h2 {
+  .title h1{
     margin: 0;
     font-weight: normal;
-  }
-
-  .form-number {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 5px 10px;
-    border: 1px solid #000;
   }
 
   .form-row {
@@ -1038,18 +1029,13 @@
     gap: 10px;
   }
 
-  .full-width {
-    width: 100%;
-  }
-
   .dotted-line {
     flex-grow: 1;
     border-bottom: 1px dotted #000;
     position: relative;
   }
 
-  input[type="text"],
-  input[type="date"] {
+  input[type="text"]{
     width: 100%;
     border: none;
     background: transparent;
@@ -1057,205 +1043,8 @@
     font-family: "Sarabun", sans-serif;
   }
 
-  input[type="text"]:focus,
-  input[type="date"]:focus {
+  input[type="text"]:focus {
     outline: none;
-  }
-
-  .fixed-text {
-    position: absolute;
-    left: 0;
-    bottom: 5px;
-  }
-
-  .checkbox-group {
-    margin: 10px 0;
-    padding-left: 20px;
-  }
-
-  .checkbox-group label {
-    display: block;
-    margin: 5px 0;
-  }
-
-  .inline-input {
-    width: 200px;
-    margin-left: 10px;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-
-  th,
-  td {
-    border: 1px solid #000;
-    padding: 10px;
-    text-align: left;
-  }
-
-  th {
-    background-color: #f5f5f5;
-  }
-
-  .center-text {
-    text-align: center;
-  }
-
-  .form-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    gap: 15px;
-  }
-
-  .form-actions button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .form-actions button:hover {
-    opacity: 0.9;
-  }
-
-  .department-input {
-    position: relative;
-  }
-
-  .department-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .department-option {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-
-  .department-option:hover {
-    background-color: #f0f0f0;
-  }
-
-  .researcher-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .researcher-option {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-
-  .researcher-option:hover {
-    background-color: #f0f0f0;
-  }
-
-  select {
-    width: 100%;
-    padding: 8px;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-size: 1em;
-    cursor: pointer;
-  }
-
-  select option {
-    background: white;
-    color: #333;
-    padding: 8px;
-  }
-
-  .researcher-input {
-    position: relative;
-  }
-
-  .researcher-field-group {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-  }
-
-  .researcher-field-group select {
-    width: 150px;
-    flex-shrink: 0;
-  }
-
-  .researcher-field-group input {
-    flex: 1;
-  }
-
-  .upload-container {
-    position: relative;
-    width: 100%;
-  }
-
-  .custom-file-upload {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-  }
-
-  .choose-file-btn {
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .choose-file-btn:hover {
-    background-color: #0056b3;
-  }
-
-  .file-name {
-    color: #333;
-    word-break: break-all;
-  }
-
-  .no-file {
-    color: #666;
-  }
-
-  .upload-input {
-    display: none;
-  }
-
-  .form-row.right-aligned {
-    display: flex;
-    justify-content: flex-end; /* จัดตำแหน่งให้ฟอร์มไปที่ขวา */
-    align-items: center; /* จัดตำแหน่งให้ label, dotted line, input อยู่ในแนวเดียวกัน */
-    gap: 10px; /* เพิ่มระยะห่างระหว่างแต่ละฟิลด์ */
   }
 
   .form-row.right-aligned1 {
@@ -1265,44 +1054,6 @@
     gap: 10px; /* เพิ่มระยะห่างระหว่างแต่ละฟิลด์ */
   }
 
-  .form-row.right-aligned2 {
-    display: flex;
-    justify-content: flex-end; /* จัดตำแหน่งให้ฟอร์มไปที่ขวา */
-    align-items: center; /* จัดตำแหน่งให้ label, dotted line, input อยู่ในแนวเดียวกัน */
-    gap: 10px; /* เพิ่มระยะห่างระหว่างแต่ละฟิลด์ */
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  th,
-  td {
-    border: 1px solid #000;
-    padding: 10px;
-    text-align: center;
-  }
-
-  th {
-    background-color: #f5f5f5;
-    font-weight: bold;
-  }
-
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-
-  tr:hover {
-    background-color: #f1f1f1;
-  }
-
-  .form-row.left-aligned {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-  }
 
   @media (max-width: 768px) {
     .form-container {
@@ -1325,15 +1076,6 @@
     .three-col {
       grid-template-columns: 1fr;
     }
-
-    table {
-      font-size: 0.9rem;
-    }
-
-    th,
-    td {
-      padding: 5px;
-    }
   }
 
   @media (max-width: 480px) {
@@ -1345,18 +1087,8 @@
       align-items: center;
     }
 
-    .title h1,
-    .title h2 {
+    .title h1{
       font-size: 1.2rem;
-    }
-
-    table {
-      font-size: 0.8rem;
-    }
-
-    th,
-    td {
-      padding: 3px;
     }
 
     input[type="text"],

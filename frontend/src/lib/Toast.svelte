@@ -1,4 +1,9 @@
-{#each toasts as toast (toast.id)}
+<script lang="ts">
+  import { fly } from "svelte/transition";
+  import { toastStore } from "$lib/stores/toastStore";
+</script>
+
+{#each $toastStore as toast (toast.id)}
   <div
     class="toast"
     class:toast-success={toast.type === 'success'}
@@ -13,21 +18,6 @@
     </div>
   </div>
 {/each}
-
-<script>
-  import { fly } from "svelte/transition";
-  import { toastStore } from "$lib/stores/toastStore";
-  import { onDestroy } from "svelte";
-
-  let toasts  = [];
-
-  // Subscribe ค่า toast จาก store
-  const unsubscribe = toastStore.subscribe(value => {
-    toasts = value;
-  });
-
-  onDestroy(unsubscribe);
-</script>
 
 <style>
   .toast {

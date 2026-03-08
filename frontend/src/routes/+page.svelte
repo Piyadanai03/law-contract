@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
   import SocialLogin from "$lib/SocialLogin.svelte";
   import { goto } from "$app/navigation";
@@ -9,10 +9,10 @@
   const FACEBOOK_APP_ID = import.meta.env.VITE_FACEBOOK_APP_ID;
   const BACKEND_API = import.meta.env.VITE_BACKEND_API; 
 
-  let loading = false;
-  let error = null;
+  let loading: boolean = false;
+  let error: string | null = null;
 
-  async function handleGoogleSuccess(event) {
+  async function handleGoogleSuccess(event: CustomEvent) {
     const { user, credential } = event.detail;
     loading = true;
     error = null;
@@ -39,11 +39,9 @@
       }
 
       const data = await response.json();
-
       authStore.login(data.token, data.user);
-
       goto("/home");
-    } catch (err) {
+    } catch (err: any) {
       console.error("Google authentication error:", err);
       error = "Failed to complete authentication. Please try again.";
     } finally {
@@ -51,9 +49,8 @@
     }
   }
 
-
-  async function handleFacebookSuccess(event) {
-    const { accessToken, user, userID } = event.detail;
+  async function handleFacebookSuccess(event: CustomEvent) {
+    const { user, userID } = event.detail;
     loading = true;
     error = null;
 
@@ -68,7 +65,7 @@
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          accessToken,
+          accessToken: event.detail.accessToken,
           userData: {
             facebookId: userID,
             name: user.name,
@@ -85,11 +82,9 @@
       }
 
       const data = await response.json();
-      
       authStore.login(data.token, data.user);
-      
       goto("/home");
-    } catch (err) {
+    } catch (err: any) {
       console.error("Facebook authentication error:", err);
       error = "Failed to complete authentication. Please try again.";
     } finally {
@@ -97,14 +92,14 @@
     }
   }
 
-  function handleGoogleFailure(event) {
+  function handleGoogleFailure(event: CustomEvent) {
     const { error: authError } = event.detail;
     console.error("Google authentication failed:", authError);
     error = "Failed to authenticate with Google. Please try again.";
     loading = false;
   }
 
-  function handleFacebookFailure(event) {
+  function handleFacebookFailure(event: CustomEvent) {
     const { error: authError } = event.detail;
     console.error("Facebook authentication failed:", authError);
     error = "Failed to authenticate with Facebook. Please try again.";
@@ -117,6 +112,7 @@
     }
   });
 </script>
+
 
 <div class="container">
   <div class="welcome-card">

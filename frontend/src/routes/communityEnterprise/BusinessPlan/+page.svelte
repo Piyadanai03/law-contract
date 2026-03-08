@@ -1,14 +1,50 @@
-<script>
-  // @ts-nocheck
-
+<script lang="ts">
   import jsPDF from "jspdf";
-  import "jspdf-autotable";
+  import autoTable from "jspdf-autotable";
   import { font } from "$lib/THSarabunNew-normal.js";
   import { addToast } from "$lib/stores/toastStore";
   import Toast from "$lib/Toast.svelte";
 
-  const BACKEND_API = import.meta.env.VITE_BACKEND_API; 
-  const initialFormData = {
+  const BACKEND_API = import.meta.env.VITE_BACKEND_API;
+
+  type FormData = {
+    d00: string;
+    d0: string;
+    d1: string;
+    d2: string;
+    d3: string;
+    d4: string;
+    d5: string;
+    d6: string;
+    d7: string;
+    d8: string;
+    d9: string;
+    d10: string;
+    d11: string;
+    d12: string[];
+    d13: string[];
+    d14: string[];
+    d15: string[];
+    d16: string[];
+    d17: string;
+    d18: string;
+  };
+
+  type RowData = {
+    index: string;
+    project: string;
+    production: string;
+    raw_materials: string;
+    product: string;
+    marketing: string;
+    budget: string;
+    self_manage: string;
+    gov_support: string;
+    private_support: string;
+    [key: string]: string;
+  };
+
+  const initialFormData: FormData = {
     d00: "",
     d0: "",
     d1: "",
@@ -22,21 +58,21 @@
     d9: "",
     d10: "",
     d11: "",
-    d12: ["", "", "", "", "", "", "", "", "", ""], // แถวที่ 1
-    d13: ["", "", "", "", "", "", "", "", "", ""], // แถวที่ 2
-    d14: ["", "", "", "", "", "", "", "", "", ""], // แถวที่ 3
-    d15: ["", "", "", "", "", "", "", "", "", ""], // แถวที่ 4
-    d16: ["", "", "", "", "", "", "", "", "", ""], // แถวที่ 5
+    d12: ["", "", "", "", "", "", "", "", "", ""],
+    d13: ["", "", "", "", "", "", "", "", "", ""],
+    d14: ["", "", "", "", "", "", "", "", "", ""],
+    d15: ["", "", "", "", "", "", "", "", "", ""],
+    d16: ["", "", "", "", "", "", "", "", "", ""],
     d17: "",
     d18: "",
   };
 
-  let formData = structuredClone(initialFormData);
+  let formData: FormData = structuredClone(initialFormData);
 
   let isSubmitting = false;
 
   async function addDocument() {
-    if (isSubmitting) return; // ป้องกันการกดซ้ำ
+    if (isSubmitting) return;
     isSubmitting = true;
 
     const isValid = ClickData();
@@ -49,7 +85,7 @@
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem('sessionToken')}`
+        Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
       },
       body: JSON.stringify({
         document_type_id: 5,
@@ -71,26 +107,33 @@
     isSubmitting = false;
   }
 
-  function splitTextToLines(doc, text, maxWidth) {
+  function splitTextToLines(doc: jsPDF, text: string, maxWidth: number): string[] {
     return doc.splitTextToSize(text, maxWidth);
   }
 
-  function addMultilineText(doc, text, x, y, maxWidth, lineHeight) {
+  function addMultilineText(
+    doc: jsPDF,
+    text: string,
+    x: number,
+    y: number,
+    maxWidth: number,
+    lineHeight: number
+  ): void {
     const lines = splitTextToLines(doc, text, maxWidth);
-    lines.forEach((line, index) => {
+    lines.forEach((line: string, index: number) => {
       doc.text(line, x, y + index * lineHeight);
     });
   }
 
+  const tableRowKeys: Array<keyof FormData> = ["d12", "d13", "d14", "d15", "d16"];
+
   function generatePDF() {
     const doc = new jsPDF("p", "mm", "a4");
 
-    // โหลดฟอนต์ภาษาไทย (THSarabunNew)
     doc.addFileToVFS("THSarabunNew.ttf", font);
     doc.addFont("THSarabunNew.ttf", "THSarabunNew", "normal");
     doc.setFont("THSarabunNew", "normal");
 
-    // ส่วนหัวเอกสาร
     doc.setFontSize(20);
     doc.text(
       "แผนประกอบการสำหรับวิสาหกิจชุมชน/เครือข่ายวิสาหกิจชุมชน",
@@ -104,7 +147,7 @@
     doc.text(`${formData.d0}`, 120, 37, { align: "center" });
 
     doc.setFontSize(14);
-    doc.rect(135, 8, 70, 11, "S"); // กรอบสี่เหลี่ยม (x, y, width, height)
+    doc.rect(135, 8, 70, 11, "S");
     doc.text(`วัน/เดือน/ปีที่รับเรื่อง ${formData.d00}`, 140, 15);
 
     doc.setFontSize(16);
@@ -128,17 +171,16 @@
     doc.text(`2. ประเภทวิสาหกิจชุมชน`, 14, 74);
     doc.circle(61, 73, 1.5);
     doc.text(`วิสาหกิจชุมชน`, 65, 74);
-
     doc.circle(96, 73, 1.5);
     doc.text(`เครือข่ายวิสาหกิจชุมชน`, 100, 74);
 
     if (formData.d6 === "วิสาหกิจชุมชน") {
       doc.setFontSize(20);
-      doc.text("/", 61.5, 73.5, { align: "center" }); // Centered inside the circle
+      doc.text("/", 61.5, 73.5, { align: "center" });
       doc.setFontSize(16);
     } else if (formData.d6 === "เครือข่ายวิสาหกิจชุมชน") {
       doc.setFontSize(20);
-      doc.text("/", 96.5, 73.5, { align: "center" }); // Centered inside the circle
+      doc.text("/", 96.5, 73.5, { align: "center" });
       doc.setFontSize(16);
     }
 
@@ -158,8 +200,7 @@
 
     doc.text(`3. แผนการพัฒนาวิสาหกิจชุมชน/เครือข่ายวิสาหกิจชุมชน`, 14, 104);
 
-    // หัวข้อหลักของตาราง
-    const columns = [
+    const columns: Array<{ title: string; dataKey: keyof RowData }> = [
       { title: "ลำดับ", dataKey: "index" },
       { title: "ชื่อโครงการ/กิจกรรม", dataKey: "project" },
       { title: "การผลิต", dataKey: "production" },
@@ -172,66 +213,40 @@
       { title: "สนับสนุนโดยภาคเอกชน (ระบุ...)", dataKey: "private_support" },
     ];
 
-    // ดึงข้อมูลจาก formData
-    const data = Array.from({ length: 5 }, (_, i) => ({
-      index: formData[`d${12 + i}`][0] || "",
-      project: formData[`d${12 + i}`][1] || "",
-      production: formData[`d${12 + i}`][2] || "",
-      raw_materials: formData[`d${12 + i}`][3] || "",
-      product: formData[`d${12 + i}`][4] || "",
-      marketing: formData[`d${12 + i}`][5] || "",
-      budget: formData[`d${12 + i}`][6] || "",
-      self_manage: formData[`d${12 + i}`][7] || "",
-      gov_support: formData[`d${12 + i}`][8] || "",
-      private_support: formData[`d${12 + i}`][9] || "",
-    }));
+    const data: RowData[] = tableRowKeys.map((key) => {
+      const row = formData[key] as string[];
+      return {
+        index: row[0] || "",
+        project: row[1] || "",
+        production: row[2] || "",
+        raw_materials: row[3] || "",
+        product: row[4] || "",
+        marketing: row[5] || "",
+        budget: row[6] || "",
+        self_manage: row[7] || "",
+        gov_support: row[8] || "",
+        private_support: row[9] || "",
+      };
+    });
 
-    // ใช้ autoTable เพื่อสร้างตารางพร้อมเส้นกรอบ
-    doc.autoTable({
+    autoTable(doc, {
       startY: 110,
       head: [
         [
-          {
-            content: "ลำดับ",
-            rowSpan: 2,
-            styles: { halign: "center", cellWidth: 15 },
-          },
-          {
-            content: "ชื่อโครงการ/ กิจกรรม",
-            rowSpan: 2,
-            styles: { halign: "center", cellWidth: 26 },
-          },
+          { content: "ลำดับ", rowSpan: 2, styles: { halign: "center", cellWidth: 15 } },
+          { content: "ชื่อโครงการ/ กิจกรรม", rowSpan: 2, styles: { halign: "center", cellWidth: 26 } },
           { content: "พัฒนาด้าน", colSpan: 4, styles: { halign: "center" } },
-          {
-            content: "งบ\nประมาณ\n(บาท)",
-            rowSpan: 2,
-            styles: { halign: "center", cellWidth: 20 },
-          },
+          { content: "งบ\nประมาณ\n(บาท)", rowSpan: 2, styles: { halign: "center", cellWidth: 20 } },
           { content: "การดำเนินการ", colSpan: 3, styles: { halign: "center" } },
         ],
         [
           { content: "การ\nผลิต", styles: { halign: "center", cellWidth: 14 } },
-          {
-            content: "วัตถุ\nดิบ",
-            styles: { halign: "center", cellWidth: 14 },
-          },
-          {
-            content: "ผลิต\nภัณฑ์",
-            styles: { halign: "center", cellWidth: 14 },
-          },
+          { content: "วัตถุ\nดิบ", styles: { halign: "center", cellWidth: 14 } },
+          { content: "ผลิต\nภัณฑ์", styles: { halign: "center", cellWidth: 14 } },
           { content: "การ\nตลาด", styles: { halign: "center", cellWidth: 14 } },
-          {
-            content: "ดำเนินการ\nได้เอง",
-            styles: { halign: "center", cellWidth: 20 },
-          },
-          {
-            content: "สนับสนุน\nโดยภาครัฐ (ระบุ...)",
-            styles: { halign: "center", cellWidth: 22 },
-          },
-          {
-            content: "สนับสนุน\nโดยภาค\nเอกชน (ระบุ...)",
-            styles: { halign: "center", cellWidth: 22 },
-          },
+          { content: "ดำเนินการ\nได้เอง", styles: { halign: "center", cellWidth: 20 } },
+          { content: "สนับสนุน\nโดยภาครัฐ (ระบุ...)", styles: { halign: "center", cellWidth: 22 } },
+          { content: "สนับสนุน\nโดยภาค\nเอกชน (ระบุ...)", styles: { halign: "center", cellWidth: 22 } },
         ],
       ],
       body: data.map((row) => columns.map((col) => row[col.dataKey] || "")),
@@ -242,10 +257,10 @@
         valign: "middle",
         lineWidth: 0.2,
         lineColor: [0, 0, 0],
-        fillColor: false, // Remove cell background color
+        fillColor: false,
       },
       headStyles: {
-        fillColor: false, // Remove header background color
+        fillColor: false,
         textColor: 0,
         fontStyle: "bold",
         lineColor: [0, 0, 0],
@@ -253,39 +268,22 @@
       theme: "grid",
     });
 
-    doc.text(
-      `3.1 เหตุผล/วัตถุประสงค์ที่จะดำเนินการ(ทำทำไม/ทำเพื่ออะไร)`,
-      14,
-      doc.autoTable.previous.finalY + 15
-    );
-    addMultilineText(
-      doc,
-      formData.d17,
-      14,
-      doc.autoTable.previous.finalY + 25,
-      180,
-      8
-    );
+    // @ts-ignore
+    const finalY = (doc as any).lastAutoTable.finalY;
+
+    doc.text(`3.1 เหตุผล/วัตถุประสงค์ที่จะดำเนินการ(ทำทำไม/ทำเพื่ออะไร)`, 14, finalY + 15);
+    addMultilineText(doc, formData.d17, 14, finalY + 25, 180, 8);
 
     doc.addPage();
     doc.setFontSize(16);
     doc.text(`3.2 เป้าหมายที่จะดำเนินการ(ทำจำนวนเท่าไหร่)`, 14, 20);
     addMultilineText(doc, formData.d18, 14, 30, 180, 8);
 
-    doc.text(
-      "ลงชื่อ.................................................ผู้รองรับแผน",
-      120,
-      100
-    );
-    doc.text(
-      "(................................................................)",
-      120,
-      110
-    );
+    doc.text("ลงชื่อ.................................................ผู้รองรับแผน", 120, 100);
+    doc.text("(................................................................)", 120, 110);
     doc.text(`${formData.d1} ${formData.d2}  ${formData.d3}`, 125, 109);
     doc.text("สมาชิกผู้มีอำนาจทำการแทน", 130, 120);
 
-    // บันทึกเอกสารเป็นไฟล์ PDF
     doc.save("แผนประกอบการ.pdf");
     addToast("พิมพ์ PDF สำเร็จ", "success");
   }
@@ -295,7 +293,7 @@
     addToast("ล้างฟอร์มสำเร็จ", "success");
   }
 
-  function ClickData() {
+  function ClickData(): boolean {
     if (!formData.d00) {
       addToast("กรุณากรอกวัน/เดือน/ปีที่รับเรื่อง", "warning");
       return false;
@@ -323,20 +321,29 @@
     } else if (!formData.d10) {
       addToast("กรุณากรอกรหัสทะเบียน", "warning");
       return false;
-    } else if (formData.d12.some((value) => value === "")) {
+    } else if (formData.d12.some((value: string) => value === "")) {
       addToast("กรุณากรอกข้อมูลให้ครบทุกช่องในแถวที่ 1", "warning");
       return false;
     }
-    const optionalFields = { d13: 2, d14: 3, d15: 4, d16: 5 };
-    for (const [field, row] of Object.entries(optionalFields)) {
+
+    const optionalFields: Array<{ key: keyof FormData; row: number }> = [
+      { key: "d13", row: 2 },
+      { key: "d14", row: 3 },
+      { key: "d15", row: 4 },
+      { key: "d16", row: 5 },
+    ];
+
+    for (const { key, row } of optionalFields) {
+      const fieldData = formData[key] as string[];
       if (
-        formData[field].some((value) => value !== "") &&
-        formData[field].some((value) => value === "")
+        fieldData.some((value: string) => value !== "") &&
+        fieldData.some((value: string) => value === "")
       ) {
         addToast(`กรุณากรอกข้อมูลให้ครบทุกช่องในแถวที่ ${row}`, "warning");
         return false;
       }
     }
+
     if (!formData.d17) {
       addToast("กรุณากรอกเหตุผล/วัตถุประสงค์", "warning");
       return false;
@@ -346,8 +353,6 @@
     }
     return true;
   }
-
-  
 </script>
 
 <div class="form-container">
@@ -361,7 +366,7 @@
         <input
           type="text"
           placeholder="พ.ศ."
-          maxLength={8}
+          maxlength={8}
           bind:value={formData.d0}
           class="text-center"
         />
@@ -386,36 +391,16 @@
       <h2>1.ข้าพเจ้า</h2>
       <div class="dotted-line researcher-input">
         <div class="researcher-field-group">
-          <input
-            type="text"
-            placeholder="คํานําหน้า"
-            bind:value={formData.d1}
-            class="border border-gray-300 rounded-lg px-3 py-2"
-          />
-          <input
-            type="text"
-            placeholder="ชื่อ"
-            bind:value={formData.d2}
-            class="border border-gray-300 rounded-lg px-3 py-2"
-          />
-          <input
-            type="text"
-            placeholder="นามสกุล"
-            bind:value={formData.d3}
-            class="border border-gray-300 rounded-lg px-3 py-2"
-          />
+          <input type="text" placeholder="คํานําหน้า" bind:value={formData.d1} class="border border-gray-300 rounded-lg px-3 py-2" />
+          <input type="text" placeholder="ชื่อ" bind:value={formData.d2} class="border border-gray-300 rounded-lg px-3 py-2" />
+          <input type="text" placeholder="นามสกุล" bind:value={formData.d3} class="border border-gray-300 rounded-lg px-3 py-2" />
         </div>
       </div>
     </div>
     <div class="field full-width">
       <h2>วัน-เดือน-ปีเกิด</h2>
       <div class="dotted-line">
-        <input
-          type="text"
-          placeholder="1-ตุลาคม-2546"
-          bind:value={formData.d4}
-          class="border border-gray-300 rounded-lg px-3 py-2"
-        />
+        <input type="text" placeholder="1-ตุลาคม-2546" bind:value={formData.d4} class="border border-gray-300 rounded-lg px-3 py-2" />
       </div>
     </div>
   </div>
@@ -424,11 +409,7 @@
     <div class="field full-width">
       <h2>บัตรประจำตัวประชาชนผู้มีอำนาจทำการแทน</h2>
       <div class="dotted-line">
-        <input
-          type="text"
-          bind:value={formData.d5}
-          class="border border-gray-300 rounded-lg px-3 py-2"
-        />
+        <input type="text" bind:value={formData.d5} class="border border-gray-300 rounded-lg px-3 py-2" />
       </div>
     </div>
   </div>
@@ -437,21 +418,11 @@
     <h2>2.ประเภทวิสาหกิจชุมชน</h2>
     <div class="checkbox-group three-col">
       <label>
-        <input
-          type="radio"
-          name="objective"
-          value="วิสาหกิจชุมชน"
-          bind:group={formData.d6}
-        />
+        <input type="radio" name="objective" value="วิสาหกิจชุมชน" bind:group={formData.d6} />
         วิสาหกิจชุมชน
       </label>
       <label>
-        <input
-          type="radio"
-          name="objective"
-          value="เครือข่ายวิสาหกิจชุมชน"
-          bind:group={formData.d6}
-        />
+        <input type="radio" name="objective" value="เครือข่ายวิสาหกิจชุมชน" bind:group={formData.d6} />
         เครือข่ายวิสาหกิจชุมชน
       </label>
     </div>
@@ -461,31 +432,19 @@
     <div class="field">
       <h2>ชื่อ</h2>
       <div class="dotted-line">
-        <input
-          type="text"
-          bind:value={formData.d8}
-          class="border border-gray-300 rounded-lg px-3 py-2"
-        />
+        <input type="text" bind:value={formData.d8} class="border border-gray-300 rounded-lg px-3 py-2" />
       </div>
     </div>
     <div class="field">
       <h2>ที่ตั้ง</h2>
       <div class="dotted-line">
-        <input
-          type="text"
-          bind:value={formData.d9}
-          class="border border-gray-300 rounded-lg px-3 py-2"
-        />
+        <input type="text" bind:value={formData.d9} class="border border-gray-300 rounded-lg px-3 py-2" />
       </div>
     </div>
     <div class="field">
       <h2>รหัสทะเบียน</h2>
       <div class="dotted-line">
-        <input
-          type="text"
-          bind:value={formData.d10}
-          class="border border-gray-300 rounded-lg px-3 py-2"
-        />
+        <input type="text" bind:value={formData.d10} class="border border-gray-300 rounded-lg px-3 py-2" />
       </div>
     </div>
   </div>
@@ -497,22 +456,15 @@
     "ดำเนินการได้เอง" ให้ " / " ที่ช่องนั้น สามารถเลือกได้เพียงตัวเลือกเดียว
     หากไม่เลือกให้ " - " ที่ช่องนั้น)
   </span>
-  <table
-    class="border-collapse border border-gray-500 w-full text-sm text-center mt-4"
-  >
+
+  <table class="border-collapse border border-gray-500 w-full text-sm text-center mt-4">
     <thead>
       <tr class="bg-gray-200">
         <th class="border border-gray-500 px-2 py-1" rowspan="2">ลำดับ</th>
-        <th class="border border-gray-500 px-2 py-1" rowspan="2"
-          >ชื่อโครงการ/กิจกรรม</th
-        >
+        <th class="border border-gray-500 px-2 py-1" rowspan="2">ชื่อโครงการ/กิจกรรม</th>
         <th class="border border-gray-500 px-2 py-1" colspan="4">พัฒนาด้าน</th>
-        <th class="border border-gray-500 px-2 py-1" rowspan="2"
-          >งบประมาณ (บาท)</th
-        >
-        <th class="border border-gray-500 px-2 py-1" colspan="3"
-          >การดำเนินการ</th
-        >
+        <th class="border border-gray-500 px-2 py-1" rowspan="2">งบประมาณ (บาท)</th>
+        <th class="border border-gray-500 px-2 py-1" colspan="3">การดำเนินการ</th>
       </tr>
       <tr class="bg-gray-200">
         <th class="border border-gray-500 px-2 py-1">การผลิต</th>
@@ -520,23 +472,19 @@
         <th class="border border-gray-500 px-2 py-1">ผลิตภัณฑ์</th>
         <th class="border border-gray-500 px-2 py-1">การตลาด</th>
         <th class="border border-gray-500 px-2 py-1">ดำเนินการได้เอง</th>
-        <th class="border border-gray-500 px-2 py-1"
-          >สนับสนุนโดยภาครัฐ (ระบุ...)</th
-        >
-        <th class="border border-gray-500 px-2 py-1"
-          >สนับสนุนโดยภาคเอกชน (ระบุ...)</th
-        >
+        <th class="border border-gray-500 px-2 py-1">สนับสนุนโดยภาครัฐ (ระบุ...)</th>
+        <th class="border border-gray-500 px-2 py-1">สนับสนุนโดยภาคเอกชน (ระบุ...)</th>
       </tr>
     </thead>
     <tbody>
-      {#each Array(5) as _, i}
+      {#each tableRowKeys as key}
         <tr>
           {#each Array(10) as _, j}
             <td class="border border-gray-500 p-1">
               <input
                 type="text"
                 class="w-full border-none text-center"
-                bind:value={formData[`d${12 + i}`][j]}
+                bind:value={(formData[key] as string[])[j]}
               />
             </td>
           {/each}
@@ -548,25 +496,15 @@
   <span class="block mt-4 font-bold">
     3.1 เหตุผล/วัตถุประสงค์ที่จะดำเนินการ(ทำทำไม/ทำเพื่ออะไร)
   </span>
-
   <div class="form-row mt-2">
-    <textarea
-      bind:value={formData.d17}
-      rows="5"
-      class="w-full border border-gray-300 rounded-lg px-3 py-2"
-    ></textarea>
+    <textarea bind:value={formData.d17} rows={5} class="w-full border border-gray-300 rounded-lg px-3 py-2"></textarea>
   </div>
 
   <span class="block mt-4 font-bold">
     3.2 เป้าหมายที่จะดำเนินการ(ทำจำนวนเท่าไหร่)
   </span>
-
   <div class="form-row mt-2">
-    <textarea
-      bind:value={formData.d18}
-      rows="5"
-      class="w-full border border-gray-300 rounded-lg px-3 py-2"
-    ></textarea>
+    <textarea bind:value={formData.d18} rows={5} class="w-full border border-gray-300 rounded-lg px-3 py-2"></textarea>
   </div>
 
   <div class="button-container flex space-x-4 mt-4 justify-center">
