@@ -84,7 +84,7 @@
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem('sessionToken')}`
+        Authorization: `Bearer ${localStorage.getItem("sessionToken")}`,
       },
       body: JSON.stringify({
         document_type_id: 6,
@@ -799,7 +799,7 @@
 
   <div class="form-row two-col">
     <div class="field full-width">
-      <label>1.ข้าพเจ้า</label>
+      <h1>1.ข้าพเจ้า</h1>
       <div class="dotted-line researcher-input">
         <div class="researcher-field-group">
           <input type="text" placeholder="คำนำหน้า" bind:value={formData.b2} />
@@ -809,7 +809,7 @@
       </div>
     </div>
     <div class="field full-width">
-      <label>วัน-เดือน-ปีเกิด</label>
+      <h1>วัน-เดือน-ปีเกิด</h1>
       <div class="dotted-line">
         <input
           type="text"
@@ -822,7 +822,7 @@
 
   <div class="form-row">
     <div class="field full-width">
-      <label>บัตรประจำตัวประชาชนผู้มีอำนาจทำการแทน</label>
+      <h1>บัตรประจำตัวประชาชนผู้มีอำนาจทำการแทน</h1>
       <div class="dotted-line">
         <input type="text" bind:value={formData.b6} />
       </div>
@@ -855,13 +855,13 @@
 
   <div class="form-row two-col">
     <div class="field">
-      <label>ชื่อ</label>
+      <h1>ชื่อ</h1>
       <div class="dotted-line">
         <input type="text" bind:value={formData.b9} />
       </div>
     </div>
     <div class="field">
-      <label>ที่ตั้ง</label>
+      <h1>ที่ตั้ง</h1>
       <div class="dotted-line">
         <input type="text" bind:value={formData.b10} />
       </div>
@@ -870,13 +870,13 @@
 
   <div class="form-row two-col">
     <div class="field">
-      <label>เบอร์โทร</label>
+      <h1>เบอร์โทร</h1>
       <div class="dotted-line">
         <input type="text" bind:value={formData.b11} />
       </div>
     </div>
     <div class="field">
-      <label>รหัสทะเบียน</label>
+      <h1>รหัสทะเบียน</h1>
       <div class="dotted-line">
         <input type="text" bind:value={formData.b12} />
       </div>
@@ -885,11 +885,11 @@
 
   <div class="form-row two-col">
     <div class="field">
-      <label>3.จำนวนสมาชิกในปีปัจจุบัน</label>
+      <h1>3.จำนวนสมาชิกในปีปัจจุบัน</h1>
       <div class="dotted-line">
         <input type="text" bind:value={formData.b13} />
       </div>
-      <label>ราย</label>
+      <h2>ราย</h2>
     </div>
   </div>
 
@@ -977,21 +977,19 @@
     </table>
     <div class="form-row">
       <div class="field">
-        <label
-          >หมายเหตุ : สินค้า/บริการ (หลัก) หมายถึง
+        <p>
+          หมายเหตุ : สินค้า/บริการ (หลัก) หมายถึง
           กิจกรรมที่มีการดำเนินการเป็นลำดับที่ 1 จากกิจกรรมอื่น ๆ
           ที่มีการดำเนินการ ทั้งหมด โดยให้ระบุเป็นลำดับที่ 1 ในแบบ สวช. 01
-          ทังนี้ หากมีการเปลี่ยนแปลงให้ยื่นคำร้องขอปรับปรุงทะเบียน (แบบ สวช.05)</label
-        >
+          ทังนี้ หากมีการเปลี่ยนแปลงให้ยื่นคำร้องขอปรับปรุงทะเบียน (แบบ สวช.05)
+        </p>
       </div>
     </div>
   </div>
 
   <div class="form-row">
     <div class="field">
-      <label
-        >5.ทุนที่ใช้ในการประกอบกิจการของวิสาหกิจชุมชน/เครือข่ายวิสาหกิจชุมชน</label
-      >
+      <p>5.ทุนที่ใช้ในการประกอบกิจการของวิสาหกิจชุมชน/เครือข่ายวิสาหกิจชุมชน</p>
     </div>
     <table>
       <thead>
@@ -1292,10 +1290,10 @@
 
   <div class="form-row">
     <div class="field">
-      <label
-        >6.รายได้จากการดำเนินกิจการของวิสาหกิจชุมชน/เครือข่ายวิสาหกิจชุมชน(เก็บขอมูล
-        1 ม.ค. – 31 ธ.ค.)</label
-      >
+      <p>
+        6.รายได้จากการดำเนินกิจการของวิสาหกิจชุมชน/เครือข่ายวิสาหกิจชุมชน(เก็บขอมูล
+        1 ม.ค. – 31 ธ.ค.)
+      </p>
     </div>
   </div>
 
@@ -1392,19 +1390,19 @@
 
   <div class="form-row two-col">
     <div class="field">
-      <label>รวมรายได้/ปี</label>
+      <h1>รวมรายได้/ปี</h1>
       <div class="dotted-line">
         <input type="text" bind:value={formData.b28} />
       </div>
     </div>
     <div class="field">
-      <label>บาท</label>
+      <h1>บาท</h1>
     </div>
   </div>
 
   <div class="form-row">
     <div class="field">
-      <label>7.ผลการพัฒนาวิสาหกิจชุมชน/เครือข่ายวิสาหกิจชุมชน</label>
+      <h1>7.ผลการพัฒนาวิสาหกิจชุมชน/เครือข่ายวิสาหกิจชุมชน</h1>
     </div>
   </div>
 
@@ -1650,7 +1648,7 @@
 
     <div class="form-row">
       <div class="field">
-        <label>9.มาตราฐานที่ได้รับการรับรอง</label>
+        <h1>9.มาตราฐานที่ได้รับการรับรอง</h1>
       </div>
     </div>
 
@@ -1800,68 +1798,68 @@
 
     <div class="form-row">
       <div class="field">
-        <label>หมายเหตุ : ตัวอย่างมาตรฐานสินค้า/บริการ</label>
+        <h2>หมายเหตุ : ตัวอย่างมาตรฐานสินค้า/บริการ</h2>
       </div>
     </div>
 
     <div class="form-row">
       <div class="field">
-        <label>1.มาตรฐานสินค้า</label>
+        <h3>1.มาตรฐานสินค้า</h3>
       </div>
     </div>
 
     <div class="form-row three-col">
       <div class="field">
-        <label>1.อย.</label>
+        <h3>1.อย.</h3>
       </div>
       <div class="field">
-        <label>2.มอก.</label>
+        <h3>2.มอก.</h3>
       </div>
       <div class="field">
-        <label>3.มผช.</label>
+        <h3>3.มผช.</h3>
       </div>
     </div>
   </div>
 
   <div class="form-row three-col">
     <div class="field">
-      <label>4.GAP</label>
+      <h3>4.GAP</h3>
     </div>
     <div class="field">
-      <label>5.GMP</label>
+      <h3>5.GMP</h3>
     </div>
     <div class="field">
-      <label>6.Primary GMP</label>
-    </div>
-  </div>
-
-  <div class="form-row three-col">
-    <div class="field">
-      <label>7.HACCP</label>
-    </div>
-    <div class="field">
-      <label>8.GI</label>
-    </div>
-    <div class="field">
-      <label>9.ฮาลาล</label>
+      <h3>6.Primary GMP</h3>
     </div>
   </div>
 
   <div class="form-row three-col">
     <div class="field">
-      <label>10.นกยูงทอง</label>
+      <h3>7.HACCP</h3>
     </div>
     <div class="field">
-      <label>11.OTOP......ดาว</label>
+      <h3>8.GI</h3>
     </div>
     <div class="field">
-      <label>12.Organic thailand</label>
+      <h3>9.ฮาลาล</h3>
+    </div>
+  </div>
+
+  <div class="form-row three-col">
+    <div class="field">
+      <h3>10.นกยูงทอง</h3>
+    </div>
+    <div class="field">
+      <h3>11.OTOP......ดาว</h3>
+    </div>
+    <div class="field">
+      <h3>12.Organic thailand</h3>
     </div>
   </div>
 
   <div class="form-row">
     <div class="field">
-      <label>13.อื่น ๆ(ระบุ)</label>
+      <h3>13.อื่น ๆ(ระบุ)</h3>
       <div class="dotted-line">
         <input type="text" bind:value={formData.b53} />
       </div>
@@ -1870,31 +1868,31 @@
 
   <div class="form-row">
     <div class="field">
-      <label>2.มาตรฐานบริการ</label>
+      <h3>2.มาตรฐานบริการ</h3>
     </div>
   </div>
 
   <div class="form-row three-col">
     <div class="field">
-      <label>1.มาตรฐานคุณภาพแหลงท่องเที่ยวเชิงเกษตร</label>
+      <h3>1.มาตรฐานคุณภาพแหลงท่องเที่ยวเชิงเกษตร</h3>
     </div>
     <div class="field">
-      <label>2.มาตรฐานการท่องเที่ยวโดยชุมชน</label>
+      <h3>2.มาตรฐานการท่องเที่ยวโดยชุมชน</h3>
     </div>
     <div class="field">
-      <label>3.มาตรฐานโฮมสเตย์ไทย (Home stay)</label>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <div class="field">
-      <label>4.เกณฑ์คุณภาพที่พักนักเดินทาง (Home lodge)</label>
+      <h3>3.มาตรฐานโฮมสเตย์ไทย (Home stay)</h3>
     </div>
   </div>
 
   <div class="form-row">
     <div class="field">
-      <label>5.อื่น ๆ(ระบุ)</label>
+      <h3>4.เกณฑ์คุณภาพที่พักนักเดินทาง (Home lodge)</h3>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field">
+      <h3>5.อื่น ๆ(ระบุ)</h3>
       <div class="dotted-line">
         <input type="text" bind:value={formData.b54} />
       </div>
@@ -1903,7 +1901,7 @@
 
   <div class="form-row">
     <div class="field">
-      <label>10. สถานะเป็น/ไม่เป็นนิติบุคคล</label>
+      <h3>10. สถานะเป็น/ไม่เป็นนิติบุคคล</h3>
     </div>
   </div>
 
@@ -1925,7 +1923,7 @@
               </div>
               <div class="form-row">
                 <div class="field">
-                  <label>เลขประจำตัวผู้เสียภาษีอากร(ถ้ามี)</label>
+                  <h1>เลขประจำตัวผู้เสียภาษีอากร(ถ้ามี)</h1>
                   <div class="dotted-line">
                     <input type="text" bind:value={formData.b44} />
                   </div>
@@ -1959,7 +1957,7 @@
               </ul>
               <div class="form-row">
                 <div class="field">
-                  <label>เลขทะเบียนนิติบุคคล</label>
+                  <h1>เลขทะเบียนนิติบุคคล</h1>
                   <div class="dotted-line">
                     <input type="text" bind:value={formData.b46} />
                   </div>
@@ -1967,7 +1965,7 @@
               </div>
               <div class="form-row">
                 <div class="field">
-                  <label>ชื่อนิติบุคคล</label>
+                  <h1>ชื่อนิติบุคคล</h1>
                   <div class="dotted-line">
                     <input type="text" bind:value={formData.b47} />
                   </div>
@@ -1975,7 +1973,7 @@
               </div>
               <div class="form-row">
                 <div class="field">
-                  <label>ปีที่จดทะเบียน</label>
+                  <h1>ปีที่จดทะเบียน</h1>
                   <div class="dotted-line">
                     <input type="text" bind:value={formData.b48} />
                   </div>
@@ -1990,7 +1988,7 @@
 
   <div class="form-row">
     <div class="field">
-      <label>11.ประวัติการฝึกอบรม/ดงานของสมาชิก</label>
+      <h1>11.ประวัติการฝึกอบรม/ดงานของสมาชิก</h1>
     </div>
   </div>
 
@@ -2126,17 +2124,6 @@
     margin-right: 10px;
   }
 
-  .juristic-types {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
-
-  .juristic-types li {
-    margin-bottom: 5px;
-  }
-
   input {
     text-align: center;
   }
@@ -2164,12 +2151,6 @@
     position: relative;
   }
 
-  .logo {
-    width: 60px;
-    height: auto;
-    margin-right: 1px;
-  }
-
   .title {
     text-align: center;
     flex-grow: 1;
@@ -2179,14 +2160,6 @@
   .title h2 {
     margin: 0;
     font-weight: normal;
-  }
-
-  .form-number {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 5px 10px;
-    border: 1px solid #000;
   }
 
   .form-row {
@@ -2233,12 +2206,6 @@
     outline: none;
   }
 
-  .fixed-text {
-    position: absolute;
-    left: 0;
-    bottom: 5px;
-  }
-
   .checkbox-group {
     margin: 10px 0;
     padding-left: 20px;
@@ -2247,11 +2214,6 @@
   .checkbox-group label {
     display: block;
     margin: 5px 0;
-  }
-
-  .inline-input {
-    width: 200px;
-    margin-left: 10px;
   }
 
   table {
@@ -2271,100 +2233,6 @@
     background-color: #f5f5f5;
   }
 
-  .center-text {
-    text-align: center;
-  }
-
-  .form-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    gap: 15px;
-  }
-
-  .form-actions button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .form-actions button:hover {
-    opacity: 0.9;
-  }
-
-  .department-input {
-    position: relative;
-  }
-
-  .department-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .department-option {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-
-  .department-option:hover {
-    background-color: #f0f0f0;
-  }
-
-  .researcher-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .researcher-option {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-
-  .researcher-option:hover {
-    background-color: #f0f0f0;
-  }
-
-  select {
-    width: 100%;
-    padding: 8px;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-size: 1em;
-    cursor: pointer;
-  }
-
-  select option {
-    background: white;
-    color: #333;
-    padding: 8px;
-  }
-
   .researcher-input {
     position: relative;
   }
@@ -2375,72 +2243,8 @@
     width: 100%;
   }
 
-  .researcher-field-group select {
-    width: 150px;
-    flex-shrink: 0;
-  }
-
   .researcher-field-group input {
     flex: 1;
-  }
-
-  .upload-container {
-    position: relative;
-    width: 100%;
-  }
-
-  .custom-file-upload {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-  }
-
-  .choose-file-btn {
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .choose-file-btn:hover {
-    background-color: #0056b3;
-  }
-
-  .file-name {
-    color: #333;
-    word-break: break-all;
-  }
-
-  .no-file {
-    color: #666;
-  }
-
-  .upload-input {
-    display: none;
-  }
-
-  .form-row.right-aligned {
-    display: flex;
-    justify-content: flex-end; /* จัดตำแหน่งให้ฟอร์มไปที่ขวา */
-    align-items: center; /* จัดตำแหน่งให้ label, dotted line, input อยู่ในแนวเดียวกัน */
-    gap: 10px; /* เพิ่มระยะห่างระหว่างแต่ละฟิลด์ */
-  }
-
-  .form-row.right-aligned1 {
-    display: flex;
-    justify-content: flex-end; /* จัดตำแหน่งให้ฟอร์มไปที่ขวา */
-    align-items: center; /* จัดตำแหน่งให้ label, dotted line, input อยู่ในแนวเดียวกัน */
-    gap: 10px; /* เพิ่มระยะห่างระหว่างแต่ละฟิลด์ */
-  }
-
-  .form-row.right-aligned2 {
-    display: flex;
-    justify-content: flex-end; /* จัดตำแหน่งให้ฟอร์มไปที่ขวา */
-    align-items: center; /* จัดตำแหน่งให้ label, dotted line, input อยู่ในแนวเดียวกัน */
-    gap: 10px; /* เพิ่มระยะห่างระหว่างแต่ละฟิลด์ */
   }
 
   table {
@@ -2487,55 +2291,11 @@
     align-items: center;
   }
 
-  .input-box {
-    display: flex;
-    gap: 5px;
-    margin-top: 10px;
-  }
-
-  .note {
-    margin-top: 10px;
-  }
-
   .button-container {
     display: flex;
     justify-content: center; /* จัดให้อยู่กึ่งกลางแนวนอน */
     gap: 16px; /* กำหนดระยะห่างระหว่างปุ่ม */
     margin-top: 20px; /* กำหนดระยะห่างจากด้านบน */
-  }
-
-  .btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-
-  .btn-blue {
-    background-color: #3b82f6;
-  }
-
-  .btn-blue:hover {
-    background-color: #2563eb;
-  }
-
-  .btn-green {
-    background-color: #10b981;
-  }
-
-  .btn-green:hover {
-    background-color: #059669;
-  }
-
-  .btn-red {
-    background-color: #ef4444;
-  }
-
-  .btn-red:hover {
-    background-color: #dc2626;
   }
 
   @media (max-width: 768px) {
@@ -2593,8 +2353,7 @@
       padding: 3px;
     }
 
-    input[type="text"],
-    textarea {
+    input[type="text"] {
       font-size: 0.9rem;
     }
 

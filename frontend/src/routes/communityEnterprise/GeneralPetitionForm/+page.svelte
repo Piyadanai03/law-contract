@@ -457,13 +457,13 @@
   <form>
     <div class="form-row two-col">
       <div class="field">
-        <label>เขียนที่</label>
+        <h1>เขียนที่</h1>
         <div class="dotted-line">
           <input type="text" bind:value={formData.a1} />
         </div>
       </div>
       <div class="field">
-        <label>วันที่</label>
+        <h1>วันที่</h1>
         <div class="dotted-line">
           <input
             type="text"
@@ -475,7 +475,7 @@
     </div>
     <div class="form-row">
       <div class="field">
-        <label>เรียน</label>
+        <h1>เรียน</h1>
         <div class="dotted-line">
           <input type="text" bind:value={formData.a0} />
         </div>
@@ -484,7 +484,7 @@
 
     <div class="form-row two-col">
       <div class="field full-width">
-        <label>ข้าพเจ้า</label>
+        <h1>ข้าพเจ้า</h1>
         <div class="dotted-line researcher-input">
           <div class="researcher-field-group">
             <input
@@ -498,7 +498,7 @@
         </div>
       </div>
       <div class="field full-width">
-        <label>วัน-เดือน-ปีเกิด</label>
+        <h1>วัน-เดือน-ปีเกิด</h1>
         <div class="dotted-line">
           <input
             type="text"
@@ -511,7 +511,7 @@
 
     <div class="form-row">
       <div class="field full-width">
-        <label>หมายเลขประจําตัวประชาชน</label>
+        <h1>หมายเลขประจําตัวประชาชน</h1>
         <div class="dotted-line">
           <input type="text" bind:value={formData.a7} />
         </div>
@@ -520,7 +520,7 @@
 
     <div class="form-row">
       <div class="field full-width">
-        <label>เลขรหัสประจำบ้าน</label>
+        <h1>เลขรหัสประจำบ้าน</h1>
         <div class="dotted-line">
           <input type="text" bind:value={formData.a8} />
         </div>
@@ -528,19 +528,19 @@
 
       <div class="form-row three-col">
         <div class="field full-width">
-          <label>บ้านเลขที่</label>
+          <h1>บ้านเลขที่</h1>
           <div class="dotted-line">
             <input type="text" bind:value={formData.a9} />
           </div>
         </div>
         <div class="field full-width">
-          <label>หมู่ที่</label>
+          <h1>หมู่ที่</h1>
           <div class="dotted-line">
             <input type="text" bind:value={formData.a10} />
           </div>
         </div>
         <div class="field full-width">
-          <label>ถนน</label>
+          <h1>ถนน</h1>
           <div class="dotted-line">
             <input
               type="text"
@@ -553,19 +553,19 @@
 
       <div class="form-row three-col">
         <div class="field full-width">
-          <label>ตำบล</label>
+          <h1>ตำบล</h1>
           <div class="dotted-line">
             <input type="text" bind:value={formData.a12} />
           </div>
         </div>
         <div class="field full-width">
-          <label>อำเภอ</label>
+          <h1>อำเภอ</h1>
           <div class="dotted-line">
             <input type="text" bind:value={formData.a13} />
           </div>
         </div>
         <div class="field full-width">
-          <label>จังหวัด</label>
+          <h1>จังหวัด</h1>
           <div class="dotted-line">
             <input type="text" bind:value={formData.a14} />
           </div>
@@ -574,13 +574,13 @@
 
       <div class="form-row two-col">
         <div class="field">
-          <label>รหัสไปรษณีย์</label>
+          <h1>รหัสไปรษณีย์</h1>
           <div class="dotted-line">
             <input type="text" bind:value={formData.a15} />
           </div>
         </div>
         <div class="field">
-          <label>โทรศัพท์</label>
+          <h1>โทรศัพท์</h1>
           <div class="dotted-line">
             <input type="text" bind:value={formData.a16} />
           </div>
@@ -589,13 +589,13 @@
 
       <div class="form-row two-col">
         <div class="field full-width">
-          <label>โทรสาร</label>
+          <h1>โทรสาร</h1>
           <div class="dotted-line">
             <input type="text" bind:value={formData.a17} />
           </div>
         </div>
         <div class="field">
-          <label>Email Address</label>
+          <h1>Email Address</h1>
           <div class="dotted-line">
             <input type="text" bind:value={formData.a18} />
           </div>
@@ -654,19 +654,19 @@
             <div class="form-row three-col">
               <div class="field full-width">
                 <span>ที่ตั้ง:</span>
-                <label>เลขที่</label>
+                <h1>เลขที่</h1>
                 <div class="dotted-line">
                   <input type="text" bind:value={formData.a25} />
                 </div>
               </div>
               <div class="field full-width">
-                <label>หมู่ที่</label>
+                <h1>หมู่ที่</h1>
                 <div class="dotted-line">
                   <input type="text" bind:value={formData.a26} />
                 </div>
               </div>
               <div class="field full-width">
-                <label>ตำบล</label>
+                <h1>ตำบล</h1>
                 <div class="dotted-line">
                   <input type="text" bind:value={formData.a27} />
                 </div>
@@ -674,13 +674,13 @@
             </div>
             <div class="form-row two-col">
               <div class="field full-width">
-                <label>อำเภอ</label>
+                <h1>อำเภอ</h1>
                 <div class="dotted-line">
                   <input type="text" bind:value={formData.a28} />
                 </div>
               </div>
               <div class="field full-width">
-                <label>จังหวัด</label>
+                <h1>จังหวัด</h1>
                 <div class="dotted-line">
                   <input type="text" bind:value={formData.a29} />
                 </div>
@@ -688,25 +688,25 @@
             </div>
             <div class="form-row two-col">
               <div class="field full-width">
-                <label>รหัสไปรษณีย์</label>
+                <h1>รหัสไปรษณีย์</h1>
                 <div class="dotted-line">
                   <input type="text" bind:value={formData.a30} />
                 </div>
               </div>
               <div class="field full-width">
-                <label>โทรศัพท์</label>
+                <h1>โทรศัพท์</h1>
                 <div class="dotted-line">
                   <input type="text" bind:value={formData.a31} />
                 </div>
               </div>
               <div class="field full-width">
-                <label>โทรสาร</label>
+                <h1>โทรสาร</h1>
                 <div class="dotted-line">
                   <input type="text" bind:value={formData.a32} />
                 </div>
               </div>
               <div class="field full-width">
-                <label>Email Address</label>
+                <h1>Email Address</h1>
                 <div class="dotted-line">
                   <input type="text" bind:value={formData.a33} />
                 </div>
@@ -759,7 +759,7 @@
       </div>
       <div class="form-row">
         <div class="field full-width">
-          <label>โดยยื่นเเบบคำร้อง ณ</label>
+          <h1>โดยยื่นเเบบคำร้อง ณ</h1>
           <div class="dotted-line">
             <input type="text" bind:value={formData.a34} />
           </div>
@@ -768,13 +768,13 @@
 
       <div class="form-row two-col">
         <div class="field full-width">
-          <label>อำเภอ</label>
+          <h1>อำเภอ</h1>
           <div class="dotted-line">
             <input type="text" bind:value={formData.a35} />
           </div>
         </div>
         <div class="field full-width">
-          <label>จังหวัด</label>
+          <h1>จังหวัด</h1>
           <div class="dotted-line">
             <input type="text" bind:value={formData.a36} />
           </div>
@@ -832,21 +832,9 @@
     position: relative;
   }
 
-  .logo {
-    width: 60px;
-    height: auto;
-    margin-right: 1px;
-  }
-
   .title {
     text-align: center;
     flex-grow: 1;
-  }
-
-  .title h1,
-  .title h2 {
-    margin: 0;
-    font-weight: normal;
   }
 
   .form-number {
@@ -889,26 +877,6 @@
     position: relative;
   }
 
-  input[type="text"],
-  input[type="date"] {
-    width: 100%;
-    border: none;
-    background: transparent;
-    padding: 5px 0;
-    font-family: "Sarabun", sans-serif;
-  }
-
-  input[type="text"]:focus,
-  input[type="date"]:focus {
-    outline: none;
-  }
-
-  .fixed-text {
-    position: absolute;
-    left: 0;
-    bottom: 5px;
-  }
-
   .checkbox-group {
     margin: 10px 0;
     padding-left: 20px;
@@ -917,122 +885,6 @@
   .checkbox-group label {
     display: block;
     margin: 5px 0;
-  }
-
-  .inline-input {
-    width: 200px;
-    margin-left: 10px;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-
-  th,
-  td {
-    border: 1px solid #000;
-    padding: 10px;
-    text-align: left;
-  }
-
-  th {
-    background-color: #f5f5f5;
-  }
-
-  .center-text {
-    text-align: center;
-  }
-
-  .form-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    gap: 15px;
-  }
-
-  .form-actions button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .form-actions button:hover {
-    opacity: 0.9;
-  }
-
-  .department-input {
-    position: relative;
-  }
-
-  .department-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .department-option {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-
-  .department-option:hover {
-    background-color: #f0f0f0;
-  }
-
-  .researcher-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .researcher-option {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-
-  .researcher-option:hover {
-    background-color: #f0f0f0;
-  }
-
-  select {
-    width: 100%;
-    padding: 8px;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-size: 1em;
-    cursor: pointer;
-  }
-
-  select option {
-    background: white;
-    color: #333;
-    padding: 8px;
   }
 
   .researcher-input {
@@ -1045,72 +897,8 @@
     width: 100%;
   }
 
-  .researcher-field-group select {
-    width: 150px;
-    flex-shrink: 0;
-  }
-
   .researcher-field-group input {
     flex: 1;
-  }
-
-  .upload-container {
-    position: relative;
-    width: 100%;
-  }
-
-  .custom-file-upload {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-  }
-
-  .choose-file-btn {
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .choose-file-btn:hover {
-    background-color: #0056b3;
-  }
-
-  .file-name {
-    color: #333;
-    word-break: break-all;
-  }
-
-  .no-file {
-    color: #666;
-  }
-
-  .upload-input {
-    display: none;
-  }
-
-  .form-row.right-aligned {
-    display: flex;
-    justify-content: flex-end; /* จัดตำแหน่งให้ฟอร์มไปที่ขวา */
-    align-items: center; /* จัดตำแหน่งให้ label, dotted line, input อยู่ในแนวเดียวกัน */
-    gap: 10px; /* เพิ่มระยะห่างระหว่างแต่ละฟิลด์ */
-  }
-
-  .form-row.right-aligned1 {
-    display: flex;
-    justify-content: flex-end; /* จัดตำแหน่งให้ฟอร์มไปที่ขวา */
-    align-items: center; /* จัดตำแหน่งให้ label, dotted line, input อยู่ในแนวเดียวกัน */
-    gap: 10px; /* เพิ่มระยะห่างระหว่างแต่ละฟิลด์ */
-  }
-
-  .form-row.right-aligned2 {
-    display: flex;
-    justify-content: flex-end; /* จัดตำแหน่งให้ฟอร์มไปที่ขวา */
-    align-items: center; /* จัดตำแหน่งให้ label, dotted line, input อยู่ในแนวเดียวกัน */
-    gap: 10px; /* เพิ่มระยะห่างระหว่างแต่ละฟิลด์ */
   }
 
   @media (max-width: 768px) {
@@ -1134,15 +922,6 @@
     .three-col {
       grid-template-columns: 1fr;
     }
-
-    table {
-      font-size: 0.9rem;
-    }
-
-    th,
-    td {
-      padding: 5px;
-    }
   }
 
   @media (max-width: 480px) {
@@ -1152,25 +931,6 @@
 
     .header {
       align-items: center;
-    }
-
-    .title h1,
-    .title h2 {
-      font-size: 1.2rem;
-    }
-
-    table {
-      font-size: 0.8rem;
-    }
-
-    th,
-    td {
-      padding: 3px;
-    }
-
-    input[type="text"],
-    textarea {
-      font-size: 0.9rem;
     }
 
     button {
