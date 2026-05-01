@@ -1,9 +1,25 @@
-// src/lib/stores/authStore.js
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
+// 1. กำหนด Type ให้กับข้อมูล User
+export interface User {
+  userId?: number;
+  name: string;
+  email: string;
+  picture?: string;
+}
+
+// 2. กำหนด Type ให้กับสถานะของ Auth
+export interface AuthState {
+  isAuthenticated: boolean;
+  user: User | null;
+  token: string | null;
+  loading: boolean;
+}
+
 function createAuthStore() {
-  const { subscribe, set, update } = writable({
+  // 3. ระบุ Type <AuthState> ให้กับ writable
+  const { subscribe, set, update } = writable<AuthState>({
     isAuthenticated: false,
     user: null,
     token: null,
@@ -12,7 +28,7 @@ function createAuthStore() {
 
   return {
     subscribe,
-    login: (token, userData) => {
+    login: (token: string, userData: User) => {
       if (browser) {
         localStorage.setItem('sessionToken', token);
       }
@@ -34,7 +50,7 @@ function createAuthStore() {
         }
         
         try {
-          // Decode JWT to get user data
+          // Decode JWT
           const base64Url = token.split('.')[1];
           const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
           const jsonPayload = decodeURIComponent(
@@ -44,7 +60,7 @@ function createAuthStore() {
               .join('')
           );
           
-          const user = JSON.parse(jsonPayload);
+          const user: User = JSON.parse(jsonPayload);
           set({ isAuthenticated: true, user, token, loading: false });
         } catch (error) {
           console.error('Failed to initialize auth state:', error);

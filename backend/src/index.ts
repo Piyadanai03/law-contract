@@ -1,28 +1,28 @@
 import { Hono } from "hono";
-
-import documentsRoute from "./routes/documentRoute";
-import documentTypesRoute from "./routes/documentTypesRoute";
-import authRoute from "./routes/authRoute";
-import {authMiddleware}  from "./middleware/authMiddleware";
-
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
+import apiRoutes from "./routes";
+import { config } from "./config/env";
 
 const app = new Hono();
 
-// Middleware
+// Global Middleware
 app.use("*", logger());
 app.use("*", cors());
 
-// Use user routes
-app.get("/", (c) => c.json({ msg: "Hello Hono!" }));
-app.route("/document", documentsRoute);
-app.route("/documenttype", documentTypesRoute);
-app.route("/auth", authRoute);
+// Health Check
+app.get("/", (c) => c.json({ message: "API is running smoothly!" }));
 
+// Mount all routes
+app.route("/api", apiRoutes);
+
+// Global Error Handler
+app.onError((err, c) => {
+  console.error(`[Error]: ${err.message}`);
+  return c.json({ error: "Internal Server Error" }, 500);
+});
 
 export default {
-  host: "0.0.0.0",
-  port: 8000,
+  port: config.port,
   fetch: app.fetch,
 };
