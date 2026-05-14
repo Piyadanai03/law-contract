@@ -10,8 +10,8 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
-      - VITE_GOOGLE_CLIENT_ID=13221455025-6o0vld5bhb71o1ji5uesjajfbfcqjgj4.apps.googleusercontent.com
-      - VITE_FACEBOOK_APP_ID=898735686475077
+      - VITE_GOOGLE_CLIENT_ID=hjgiorjgkldfhguftdgjhkdfjgiodrejgkdfjgkdfjgikdfjgoifd
+      - VITE_FACEBOOK_APP_ID=gfmlkdfngkfdnmgklhrgoefdmgklnfojkpsdofgjiuodfgjgpoer
       - VITE_BACKEND_API=http://localhost:8000/api
 
   backend:
@@ -27,3 +27,5 @@ services:
       - NODE_ENV=development
       - DATABASE_URL=mysql://root:p@ssw0rd@host.docker.internal:3306/contract
       - JWT_SECRET=jssdjaosdjasdsakdkasdmasdgyqwerqrfsf
+
+  
